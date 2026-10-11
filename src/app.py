@@ -12,7 +12,7 @@ st.caption("Observed probability that an event type caused deaths or injuries")
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATABASE_PATH = PROJECT_ROOT / "data" / "data.db"
-EVENTS_QUERY_PATH = PROJECT_ROOT / "queries" / "load_storm_events.sql"
+EVENTS_QUERY_PATH = PROJECT_ROOT / "queries" / "load_injuries.sql"
 STATE_CODES = {
     "ALABAMA": "AL",
     "ALASKA": "AK",
