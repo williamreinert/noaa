@@ -16,4 +16,8 @@ values are stored as `NULL`. Running the script again replaces the existing
 `StormEvents` table with a fresh import.
 
 The Streamlit dashboard loads its event data using
-`queries\load_storm_events.sql`.
+`queries\load_storm_events.sql`. Its interactive U.S. map shows harm rates
+and event, death, and injury counts for the 50 states and Washington, D.C.;
+territories and offshore regions are excluded from the map. Clicking a state
+filters the dashboard metrics, event-type chart, and table; use **Clear state
+filter** to return to all states.

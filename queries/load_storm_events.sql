@@ -1,4 +1,5 @@
 SELECT
+    STATE AS state_name,
     EVENT_TYPE AS event_type,
     COALESCE(DEATHS_DIRECT, 0)
         + COALESCE(DEATHS_INDIRECT, 0) AS deaths,
