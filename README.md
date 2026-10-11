@@ -1,28 +1,71 @@
-# NOAA Storm Events
+# NOAA Storm Events Explorer
 
-Create or refresh the SQLite database from the 2023 Storm Events details CSV:
+An interactive dashboard for exploring the **2023 NOAA Storm Events dataset**.
+Compare reported deaths and injuries with property and crop damage, and see
+how impacts vary across U.S. states and storm event types.
+
+## What you can explore
+
+- Switch between **Injuries** and **Property & crop damage**.
+- Select a state on the interactive U.S. map to filter the dashboard.
+- Compare state-level totals and event-type summaries.
+- Set a minimum event count to focus rankings on event types with enough
+  records.
+- Inspect the underlying summary table, including uncertainty intervals for
+  injury-related harm probabilities.
+
+The injury view reports the observed percentage of events with at least one
+death or injury. This is a descriptive statistic, not a measure of causal risk.
+The map includes the 50 states and Washington, D.C.; territories and offshore
+regions are omitted.
+
+## Built with
+
+Python · Streamlit · SQLite · pandas · Plotly
+
+## Run locally
+
+Requirements: Python 3.13 and the 2023 Storm Events details CSV included in
+`src/`.
+
+From the project root, create and activate a virtual environment, install
+dependencies, and build the SQLite database:
 
 ```powershell
+py -3.13 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 python src\create_database.py
 ```
 
-The script reads `src\StormEvents_details-ftp_v1.0_d2023_c20240117.csv` and
-creates `data\data.db` with a `StormEvents` table. CSV columns are retained as
-text except for columns guessed to be numeric, which use SQLite `INTEGER` or
-`REAL`. `BEGIN_DATE_TIME` and `END_DATE_TIME` use SQLite `DATETIME` columns;
-their source values are normalized to `YYYY-MM-DD HH:MM:SS`. Damage amounts
-with `K`, `M`, or `B` suffixes are converted to numeric amounts, and blank
-values are stored as `NULL`. Running the script again replaces the existing
-`StormEvents` table with a fresh import.
-
-Run the Streamlit dashboard from the project root with:
+Start the dashboard:
 
 ```powershell
 python -m streamlit run src\app.py
 ```
 
-Choose **Injuries** or **Property & crop damage** in the sidebar to switch the
-map, metrics, event-type chart, and table. The interactive U.S. map covers the
-50 states and Washington, D.C.; territories and offshore regions are excluded.
-Clicking a state filters the dashboard, and **Clear state filter** returns to
-all states.
+Streamlit prints a local URL (usually `http://localhost:8501`) to open in your
+browser.
+
+> **Note:** Re-running `create_database.py` replaces the `StormEvents` table in
+> `data/data.db` with a fresh import from the CSV.
+
+## Project layout
+
+```text
+noaa-1/
+├── data/                 # Generated SQLite database
+├── notebooks/            # Exploratory and damage analysis
+├── queries/              # SQL queries used by the dashboard
+├── src/
+│   ├── app.py             # Streamlit dashboard
+│   ├── create_database.py # CSV-to-SQLite import
+│   └── StormEvents_...csv # NOAA 2023 storm-event records
+└── requirements.txt
+```
+
+## Data source
+
+The bundled CSV is the NOAA Storm Events **2023 details** file. For dataset
+documentation and other years, visit the
+[NOAA Storm Events Database](https://www.ncei.noaa.gov/stormevents/).
