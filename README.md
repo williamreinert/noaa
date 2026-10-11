@@ -14,3 +14,6 @@ their source values are normalized to `YYYY-MM-DD HH:MM:SS`. Damage amounts
 with `K`, `M`, or `B` suffixes are converted to numeric amounts, and blank
 values are stored as `NULL`. Running the script again replaces the existing
 `StormEvents` table with a fresh import.
+
+The Streamlit dashboard loads its event data using
+`queries\load_storm_events.sql`.
