@@ -15,9 +15,14 @@ with `K`, `M`, or `B` suffixes are converted to numeric amounts, and blank
 values are stored as `NULL`. Running the script again replaces the existing
 `StormEvents` table with a fresh import.
 
-The Streamlit dashboard loads its event data using
-`queries\load_storm_events.sql`. Its interactive U.S. map shows harm rates
-and event, death, and injury counts for the 50 states and Washington, D.C.;
-territories and offshore regions are excluded from the map. Clicking a state
-filters the dashboard metrics, event-type chart, and table; use **Clear state
-filter** to return to all states.
+Run the Streamlit dashboard from the project root with:
+
+```powershell
+python -m streamlit run src\app.py
+```
+
+Choose **Injuries** or **Property & crop damage** in the sidebar to switch the
+map, metrics, event-type chart, and table. The interactive U.S. map covers the
+50 states and Washington, D.C.; territories and offshore regions are excluded.
+Clicking a state filters the dashboard, and **Clear state filter** returns to
+all states.
